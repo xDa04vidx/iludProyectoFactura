@@ -29,5 +29,7 @@ def enviar_correo(nombre, correo, producto):
         servidor.send_message(msg)
         servidor.quit()
         print("✅ Correo enviado correctamente.")
+        return True
     except Exception as e:
         print("❌ Error al enviar el correo:", e)
+        return False, str(e)

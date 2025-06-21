@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 class Vista:
     def __init__(self, root, controlador):
@@ -32,4 +33,9 @@ class Vista:
         self.controlador.guardar(nombre, correo, producto)
 
     def enviar_correo(self):
-        self.controlador.enviar_confirmacion_por_correo()
+        correo_enviado = self.controlador.enviar_confirmacion_por_correo()
+        if correo_enviado:
+            messagebox.showinfo("Correo enviado", "✅ El correo fue enviado correctamente.")
+        else:
+            error = correo_enviado[1] if isinstance(correo_enviado, tuple) else "Error desconocido"
+            messagebox.showerror("Error", f"❌ No se pudo enviar el correo:\n{error}")
