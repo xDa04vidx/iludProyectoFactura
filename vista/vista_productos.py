@@ -22,7 +22,7 @@ class VistaProductos(tk.Frame):
         tk.Button(self, text="Enviar correo", command=self.enviar_correo).pack(pady=5)
         tk.Button(self, text="Volver al registro", command=self.volver).pack(pady=5)
 
-    def mostrar_por_categoria(self, categoria):
+    def mostrar_por_categoria(self, categoria, productos):
         # Limpiar productos anteriores
         for widget in self.marco_productos.winfo_children():
             widget.destroy()
@@ -31,27 +31,6 @@ class VistaProductos(tk.Frame):
         self.imagenes = {}
 
         self.label_titulo.config(text=f"📦 Productos - Categoría: {categoria}")
-
-        # Puedes definir distintos sets de productos por categoría:
-        productos_por_categoria = {
-            "Celulares": [
-                {"nombre": "iPhone 16 pro max", "precio": "$1,199.00 USD", "imagen": os.path.join(ruta_imagenes, "iphone15.jpg")},
-                {"nombre": "iPhone 15", "precio": "$729.99 USD", "imagen": os.path.join(ruta_imagenes, "iphone15.jpg")},
-                {"nombre": "Samsung S25", "precio": "$1,379.00 USD", "imagen": os.path.join(ruta_imagenes, "samsungs25.jpg")}
-            ],
-            "Computadores": [
-                {"nombre": "MacBook Pro", "precio": "$2,399.00 USD", "imagen": os.path.join(ruta_imagenes, "macbook.jpg")},
-                {"nombre": "Asus ROG", "precio": "$1,799.00 USD", "imagen": os.path.join(ruta_imagenes, "asus.jpg")}
-            ],
-            "Estéreos": [
-                {"nombre": "Sony Vintage", "precio": "$299.99 USD", "imagen": os.path.join(ruta_imagenes, "sony.jpg")}
-            ],
-            "Auriculares": [
-                {"nombre": "AirPods Pro", "precio": "$249.00 USD", "imagen": os.path.join(ruta_imagenes, "airpods.jpg")}
-            ]
-        }
-
-        productos = productos_por_categoria.get(categoria, [])
 
         for producto in productos:
             frame = tk.Frame(self.marco_productos, borderwidth=2, relief="ridge", padx=10, pady=10)

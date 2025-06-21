@@ -1,8 +1,9 @@
-from modelo import Usuario
+from modelo.usuario import Usuario
 from vista.vista_registro import VistaRegistro
 from vista.vista_productos import VistaProductos
 from vista.vista_clasificacion import VistaClasificacion
-from servicios import enviar_correo
+from modelo.servicios import enviar_correo
+from modelo.datos_producto import PRODUCTOS_POR_CATEGORIA
 import tkinter as tk
 
 class Controlador:
@@ -28,7 +29,8 @@ class Controlador:
 
     def mostrar_productos(self, categoria):
         self.vista_clasificacion.pack_forget()
-        self.vista_productos.mostrar_por_categoria(categoria)
+        productos = PRODUCTOS_POR_CATEGORIA.get(categoria,[])
+        self.vista_productos.mostrar_por_categoria(categoria,productos)
         self.vista_productos.pack()
 
     def volver_clasificacion(self):
