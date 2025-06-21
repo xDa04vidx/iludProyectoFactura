@@ -35,6 +35,7 @@ class VistaProductos(tk.Frame):
         # Puedes definir distintos sets de productos por categoría:
         productos_por_categoria = {
             "Celulares": [
+                {"nombre": "iPhone 16 pro max", "precio": "$1,199.00 USD", "imagen": os.path.join(ruta_imagenes, "iphone15.jpg")},
                 {"nombre": "iPhone 15", "precio": "$729.99 USD", "imagen": os.path.join(ruta_imagenes, "iphone15.jpg")},
                 {"nombre": "Samsung S25", "precio": "$1,379.00 USD", "imagen": os.path.join(ruta_imagenes, "samsungs25.jpg")}
             ],
