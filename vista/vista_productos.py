@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 from PIL import Image, ImageTk
 import os
 
@@ -19,11 +18,13 @@ class VistaProductos(tk.Frame):
         self.marco_productos = tk.Frame(self)
         self.marco_productos.pack()
 
-        tk.Button(self, text="Enviar correo", command=self.enviar_correo).pack(pady=5)
-        tk.Button(self, text="Volver al registro", command=self.volver).pack(pady=5)
+        tk.Button(self, text="Volver a clasificacion", command=self.volver).pack(pady=5)
+        tk.Button(self, text="Guardar", command=self.guardar_seleccion).pack(pady=5)
 
     def mostrar_por_categoria(self, categoria, productos):
-        # Limpiar productos anteriores
+
+        self.productos_visibles = productos
+
         for widget in self.marco_productos.winfo_children():
             widget.destroy()
 
@@ -54,13 +55,18 @@ class VistaProductos(tk.Frame):
 
             self.selecciones[producto["nombre"]] = var
 
-    def enviar_correo(self):
-        resultado = self.controlador.enviar_confirmacion_por_correo()
-        if resultado is True:
-            messagebox.showinfo("Correo", "✅ Correo enviado correctamente.")
-        else:
-            error = resultado[1] if isinstance(resultado, tuple) else "Error desconocido"
-            messagebox.showerror("Error", f"❌ No se pudo enviar el correo:\n{error}")
+    def guardar_seleccion(self):
+        for nombre_producto, var in self.selecciones.items():
+            if var.get():
+                for prod in self.productos_visibles:
+                    if prod["nombre"] == nombre_producto:
+                        print(prod["nombre"])
+                        nombre = prod["nombre"]
+                        precio = float(prod["precio"].replace("$", "").replace(",", "").replace("USD", "").strip())
+
+                        self.controlador.agregar_compra(nombre, precio)
+                        break
+
 
     def volver(self):
         self.controlador.volver_clasificacion()

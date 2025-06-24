@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6f6;
+            padding: 20px;
+        }
+
+        .factura {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .factura h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .factura p {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="factura">
+        <h2>📄 Confirmación de Pedido</h2>
+        <p>Hola <strong>{{ nombre }}</strong>, gracias por tu registro.</p>
+        <p>A continuación se listan los productos seleccionados:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ filas }}
+            </tbody>
+        </table>
+
+        <p class="total">Total: <span>{{ total }}</span></p>
+
+        <p style="margin-top: 20px;">Este correo es una confirmación automática. Gracias por usar nuestra aplicación.</p>
+    </div>
+</body>
+</html>

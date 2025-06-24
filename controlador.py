@@ -19,11 +19,8 @@ class Controlador:
 
         self.vista_registro.pack()  # Mostrar solo la vista de registro
 
-    def guardar_y_mostrar_clasificacion(self, nombre, correo, producto):
-        # Guarda los datos del usuario
-        self.usuario.guardar_datos(nombre, correo, producto)
-
-        # Cambia de vista
+    def guardar_y_mostrar_clasificacion(self, nombre, correo):
+        self.usuario.guardar_datos(nombre, correo)
         self.vista_registro.pack_forget()
         self.vista_clasificacion.pack()
 
@@ -34,8 +31,8 @@ class Controlador:
         self.vista_productos.pack()
 
     def volver_clasificacion(self):
-        # Cambia de vista
         self.vista_productos.pack_forget()
+        self.vista_clasificacion.actualizar()
         self.vista_clasificacion.pack()
 
     def volver_a_registro(self):
@@ -45,8 +42,19 @@ class Controlador:
     def enviar_confirmacion_por_correo(self):
         nombre = self.usuario.nombre
         correo = self.usuario.correo
-        producto = self.usuario.producto
+        producto = self.usuario.compras
         return enviar_correo(nombre, correo, producto)
+
+    def agregar_compra(self, nombre_producto, precio):
+        self.usuario.agregar_compra(nombre_producto, precio)
+
+    def productos_seleccionados(self):
+        print(self.usuario.compras)
+        return self.usuario.compras
+    
+    def limpiar_arreglo(self):
+        self.usuario.limpiar_compras()
+        self.vista_clasificacion.actualizar()
 
     def run(self):
         self.root.mainloop()
